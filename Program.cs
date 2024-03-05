@@ -15,8 +15,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-PrepDb.PrepPopulation(app);
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -25,5 +23,16 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.UseEndpoints(endpoints => 
+{
+    endpoints.MapControllers();
+});
+
+PrepDb.PrepPopulation(app);
 
 app.Run();
